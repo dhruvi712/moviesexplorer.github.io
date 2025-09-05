@@ -1,0 +1,230 @@
+body {
+  font-family: 'Poppins', Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(to bottom, #fdfbfb, #ebedee);
+  color: #333;
+  transition: background 0.5s, color 0.5s;
+}
+
+body.dark-mode {
+  background: linear-gradient(to bottom, #1e1e1e, #121212);
+  color: #eee;
+}
+
+header {
+  text-align: center;
+  padding: 3rem 1rem;
+  background: linear-gradient(135deg, #ff7eb9, #ff758c, #ffb199);
+  background-size: 300% 300%;
+  border-bottom-left-radius: 50px;
+  border-bottom-right-radius: 50px;
+  color: white;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+  overflow: hidden;
+  animation: gradientAnimation 15s ease infinite;
+  transition: background 0.5s;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+body.dark-mode header {
+  background: linear-gradient(135deg, #ff758c, #8b1a3f, #44111f);
+  animation: gradientAnimation 20s ease infinite;
+}
+
+@keyframes gradientAnimation {
+  0% {background-position: 0% 50%;}
+  50% {background-position: 100% 50%;}
+  100% {background-position: 0% 50%;}
+}
+.header-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+header h1 {
+  font-family: poppins;
+  text-transform: uppercase;
+  margin: 0;
+  font-size: 2.5rem;
+  letter-spacing: 1px;
+  text-shadow: 1px 1px 4px rgba(0,0,0,0.3);
+}
+
+@media (max-width: 768px) {
+  header h1 {
+    font-size: 2rem;
+  }
+}
+
+#search-input {
+  padding: 0.8rem 1.2rem;
+  width: 80%;
+  max-width: 400px;
+  margin-top: 1.5rem;
+  border-radius: 50px;
+  border: none;
+  font-size: 1rem;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  transition: all 0.3s ease;
+}
+
+body.dark-mode #search-input {
+  background: #333;
+  color: #eee;
+}
+
+#search-input:focus {
+  outline: none;
+  box-shadow: 0 6px 20px rgba(255,118,140,0.6), 0 0 10px rgba(255,118,140,0.4);
+}
+
+@media (max-width: 768px) {
+  #search-input {
+    width: 90%;
+  }
+}
+
+#movies-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 2rem;
+  padding: 2rem;
+  scroll-behavior: smooth;
+}
+
+.movie-card {
+  background: #fff;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+  transition: transform 0.4s, box-shadow 0.4s;
+  position: relative;
+}
+
+body.dark-mode .movie-card {
+  background: #2b2b2b;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.5);
+}
+
+.movie-card:hover {
+  transform: translateY(-10px) scale(1.02);
+  box-shadow: 0 15px 35px rgba(255,117,140,0.3), 0 0 15px rgba(255,117,140,0.2);
+}
+
+.movie-card img {
+  width: 100%;
+  height: 320px;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s ease, opacity 0.5s ease;
+  opacity: 100;
+}
+
+.movie-card img.loaded {
+  opacity: 1;
+}
+
+.movie-card:hover img {
+  transform: scale(1.05);
+}
+
+.movie-card-content {
+  padding: 1.2rem 1rem;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.movie-card:hover .movie-card-content {
+  transform: translateY(-5px);
+  color: #ff758c;
+}
+
+.movie-card h3 {
+  margin: 0;
+  font-size: 1.2rem;
+  color: #222;
+  font-weight: 600;
+  transition: color 0.3s;
+}
+
+body.dark-mode .movie-card h3 {
+  color: #f0f0f0;
+}
+
+.movie-card p {
+  margin: 0.5rem 0 0;
+  font-size: 0.95rem;
+  color: #555;
+  line-height: 1.4;
+}
+
+body.dark-mode .movie-card p {
+  color: #ccc;
+}
+
+.favorite-btn {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: rgba(255,255,255,0.95);
+  border: none;
+  border-radius: 50%;
+  padding: 0.5rem 0.6rem;
+  cursor: pointer;
+  font-size: 1.3rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.favorite-btn:hover {
+  transform: scale(1.25);
+  background: #ff758c;
+  color: white;
+  box-shadow: 0 6px 20px rgba(255,117,140,0.5);
+}
+
+.favorite-btn.active {
+  animation: heartbeat 0.5s ease;
+  background: #ff758c;
+  color: white;
+}
+
+@keyframes heartbeat {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.4); }
+}
+
+@media (max-width: 480px) {
+  .movie-card img {
+    height: 240px;
+  }
+}
+#dark-mode-toggle {
+  position: absolute;
+  top: 35%;
+  right: 5%;
+  padding: 0.5rem 1rem;
+  font-size: 1.2rem;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  background: rgba(255,255,255,0.85);
+  color: #ff758c;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+#dark-mode-toggle:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 20px rgba(255,117,140,0.4);
+}
+
+body.dark-mode #dark-mode-toggle {
+  background: rgba(0,0,0,0.85);
+  color: #ff758c;
+}
